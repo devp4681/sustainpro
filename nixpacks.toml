@@ -1,10 +1,12 @@
-# Railway Nixpacks config
+[phases.setup]
+nixPkgs = ["nodejs_22"]
+
+[phases.install]
+cmds = ["npm install -g pnpm@latest", "pnpm install --no-frozen-lockfile"]
+
 [phases.build]
-cmds = [
-  "npm install -g pnpm",
-  "pnpm install --no-frozen-lockfile",
-  "cd artifacts/api-server && node ./build.mjs"
-]
+cmds = ["cd artifacts/api-server && node ./build.mjs"]
 
 [start]
 cmd = "node --enable-source-maps ./artifacts/api-server/dist/index.mjs"
+
