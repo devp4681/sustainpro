@@ -2,7 +2,7 @@
 [phases.build]
 cmds = [
   "npm install -g pnpm",
-  "pnpm install --frozen-lockfile",
+  "pnpm install --no-frozen-lockfile",
   "cd artifacts/api-server && node ./build.mjs"
 ]
 
