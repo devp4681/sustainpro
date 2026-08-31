@@ -36,6 +36,9 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   root: path.resolve(import.meta.dirname),
+  define: {
+    __API_URL__: JSON.stringify(process.env.VITE_API_URL || ""),
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,

@@ -1,0 +1,10 @@
+# Railway Nixpacks config
+[phases.build]
+cmds = [
+  "npm install -g pnpm",
+  "pnpm install --frozen-lockfile",
+  "cd artifacts/api-server && node ./build.mjs"
+]
+
+[start]
+cmd = "node --enable-source-maps ./artifacts/api-server/dist/index.mjs"
