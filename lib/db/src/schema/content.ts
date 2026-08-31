@@ -79,20 +79,19 @@ export const homepageContent = sqliteTable("homepage_content", {
   heroSubtitle: text("hero_subtitle").notNull().default("Global engineering consultancy specializing in chemical engineering, advanced modeling, and sustainable industrial innovation."),
   heroBgImage: text("hero_bg_image").notNull().default("/hero-bg.png"),
   stats: text("stats", { mode: "json" }).notNull().default([
-    { "value": "50+", "label": "Global Projects" },
+    { "value": "10+", "label": "Global Projects" },
     { "value": "30%", "label": "Avg Energy Saved" },
-    { "value": "15+", "label": "Patents & Pubs" },
     { "value": "100%", "label": "Sustainable Focus" }
   ]),
   servicesTitle: text("services_title").notNull().default("Comprehensive Engineering Solutions"),
   servicesSubtitle: text("services_subtitle").notNull().default("We deliver end-to-end technical excellence across the entire chemical and process engineering lifecycle."),
-  sustainabilityTitle: text("sustainability_title").notNull().default("Pioneering the Transition to Green Engineering"),
-  sustainabilityText: text("sustainability_text").notNull().default("At SustainPro Process Solutions™, we don't just optimize for today's margins; we engineer for tomorrow's reality."),
+  sustainabilityTitle: text("sustainability_title").notNull().default("Pioneering the Transition to Efficient and Sustainable Solutions"),
+  sustainabilityText: text("sustainability_text").notNull().default("At SustainPro Process Solutions LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future."),
   sustainabilityItems: text("sustainability_items", { mode: "json" }).notNull().default([
-    "Green Chemistry & Circular Economy",
-    "Carbon Capture & Utilization Technology",
-    "Deep Eutectic Solvents (DES) Research",
-    "Energy-Intensive Process Transformation"
+    "Engineering Solutions",
+    "Process Excellence",
+    "Sustainability",
+    "Training and Consulting"
   ]),
   ctaTitle: text("cta_title").notNull().default("Ready to Optimize Your Operations?"),
   ctaSubtitle: text("cta_subtitle").notNull().default("Partner with our world-class engineering team to drive efficiency, sustainability, and innovation in your facility."),

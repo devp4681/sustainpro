@@ -779,9 +779,8 @@ function HomeSection() {
   });
 
   const stats = homeContent?.stats || [
-    { value: "50+", label: "Global Projects" },
+    { value: "10+", label: "Global Projects" },
     { value: "30%", label: "Avg Energy Saved" },
-    { value: "15+", label: "Patents & Pubs" },
     { value: "100%", label: "Sustainable Focus" },
   ];
 
@@ -791,7 +790,7 @@ function HomeSection() {
     <div className="space-y-16">
       {/* Stats bar */}
       <section className="bg-primary text-white py-12 rounded-2xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20 px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20 px-8">
           {stats.map((stat: any, i: number) => (
             <div key={i}>
               <div className="text-4xl font-bold font-serif mb-2">{stat.value}</div>
@@ -840,11 +839,11 @@ function HomeSection() {
         <section className="bg-gradient-to-r from-primary/5 to-primary/10 p-10 md:p-14 rounded-2xl border border-primary/20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{homeContent.sustainabilityTitle}</h2>
-              <p className="text-gray-600 leading-relaxed">{homeContent.sustainabilityText}</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{homeContent.sustainabilityTitle || "Pioneering the Transition to Efficient and Sustainable Solutions"}</h2>
+              <p className="text-gray-600 leading-relaxed">{homeContent.sustainabilityText || "At SustainPro Process Solutions LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future."}</p>
             </div>
             <ul className="space-y-3">
-              {(homeContent.sustainabilityItems || []).map((item: string, i: number) => (
+              {(homeContent.sustainabilityItems || ["Engineering Solutions", "Process Excellence", "Sustainability", "Training and Consulting"]).map((item: string, i: number) => (
                 <li key={i} className="flex items-center gap-3 text-gray-700">
                   <CheckCircle className="w-5 h-5 text-primary shrink-0" />
                   <span>{item}</span>
