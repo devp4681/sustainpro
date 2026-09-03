@@ -10,6 +10,10 @@ services:
         value: production
       - key: PORT
         value: 10000
+      - key: DATABASE_PATH
+        value: /var/data/sustainpro.db
+      - key: UPLOADS_PATH
+        value: /var/data/uploads
     disk:
       name: sustainpro-data
       mountPath: /var/data

@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_22"]
 cmds = ["npm install -g pnpm@latest && pnpm install --no-frozen-lockfile"]
 
 [phases.build]
-cmds = ["cd artifacts/api-server && pnpm run build"]
+cmds = ["pnpm run build"]
 
 [start]
 cmd = "node --enable-source-maps ./artifacts/api-server/dist/index.mjs"
