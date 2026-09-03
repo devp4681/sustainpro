@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: sustainpro
+    env: node
+    plan: starter
+    buildCommand: corepack enable && pnpm install --frozen-lockfile=false && pnpm run build
+    startCommand: pnpm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    disk:
+      name: sustainpro-data
+      mountPath: /var/data
+      sizeGB: 1

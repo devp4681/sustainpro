@@ -48,7 +48,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded static files
-const uploadsPath = path.resolve(process.cwd(), "uploads");
+const uploadsPath = process.env.UPLOADS_PATH || path.resolve(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsPath)) {
   fs.mkdirSync(uploadsPath, { recursive: true });
 }
@@ -71,5 +71,31 @@ if (fs.existsSync(adminDistPath)) {
     res.send("Admin Dashboard Frontend is not built yet. Run `pnpm --filter @workspace/admin run build` or start its dev server.");
   });
 }
+
+// Serve SustainPro Main Website SPA if built
+const sustainproDistCandidates = [
+  path.resolve(__dirname, "..", "..", "sustainpro", "dist", "public"),
+  path.resolve(process.cwd(), "artifacts", "sustainpro", "dist", "public"),
+];
+const sustainproDistPath = sustainproDistCandidates.find((p) => fs.existsSync(p));
+
+if (sustainproDistPath) {
+  app.use(express.static(sustainproDistPath));
+  // Catch-all fallback for client-side routing
+  app.use((req, res, next) => {
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      return next();
+    }
+    if (
+      req.path.startsWith("/api") ||
+      req.path.startsWith("/admin") ||
+      req.path.startsWith("/uploads")
+    ) {
+      return next();
+    }
+    res.sendFile(path.resolve(sustainproDistPath, "index.html"));
+  });
+}
+
 
 export default app;

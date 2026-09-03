@@ -9,9 +9,10 @@ import * as schema from "./schema/index.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Store DB file relative to project root
+// Store DB file relative to project root (or custom persistent volume)
 const dbDir = path.resolve(__dirname, "..", "..", "..");
-const dbPath = path.resolve(dbDir, "sustainpro.db");
+const dbPath = process.env.DATABASE_PATH || path.resolve(dbDir, "sustainpro.db");
+
 
 const SQL = await initSqlJs();
 
