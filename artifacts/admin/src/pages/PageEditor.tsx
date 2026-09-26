@@ -399,7 +399,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                   : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)]"
               }`}
             >
-              <UserCircle className="w-4 h-4" /> Faculty Advisors ({advisors.length})
+              <UserCircle className="w-4 h-4" /> Founders ({advisors.length})
             </button>
           </>
         )}
@@ -495,25 +495,25 @@ export default function PageEditor({ params }: PageEditorProps) {
         </Card>
       )}
 
-      {/* Faculty Advisors Tab Content */}
+      {/* Founders Tab Content */}
       {activeTab === "advisors" && (
         <div className="space-y-6">
           <div className="flex justify-between items-center bg-[var(--color-surface)] p-4 rounded-xl border border-[var(--color-border)]">
             <div>
-              <h3 className="text-base font-bold text-[var(--color-text)]">Faculty Advisors Profiles</h3>
-              <p className="text-xs text-[var(--color-text-muted)] mt-1">Add or remove professor profile cards appearing in the About Us section.</p>
+              <h3 className="text-base font-bold text-[var(--color-text)]">Founders Profiles</h3>
+              <p className="text-xs text-[var(--color-text-muted)] mt-1">Add or remove founder profile cards appearing in the About Us section.</p>
             </div>
             <Button size="sm" type="button" onClick={() => {
-              setAdvisors([...advisors, { name: "New Advisor", title: "", institution: "", photoUrl: "", bio: "", link: "" }]);
-              toast.success("New advisor profile block added.");
+              setAdvisors([...advisors, { name: "New Founder", title: "", institution: "", photoUrl: "", bio: "", link: "" }]);
+              toast.success("New founder profile block added.");
             }}>
-              <Plus className="w-4 h-4 mr-2" /> Add Advisor
+              <Plus className="w-4 h-4 mr-2" /> Add Founder
             </Button>
           </div>
 
           {advisors.length === 0 ? (
             <Card className="text-center p-8 text-sm text-[var(--color-text-muted)]">
-              No advisors defined. Click &ldquo;Add Advisor&rdquo; to add one.
+              No founders defined. Click &ldquo;Add Founder&rdquo; to add one.
             </Card>
           ) : (
             <div className="grid grid-cols-1 gap-6">
@@ -523,10 +523,10 @@ export default function PageEditor({ params }: PageEditorProps) {
                     type="button"
                     onClick={() => {
                       setAdvisors(advisors.filter((_, i) => i !== idx));
-                      toast.success("Advisor removed. Remember to save changes.");
+                      toast.success("Founder removed. Remember to save changes.");
                     }}
                     className="absolute top-4 right-4 text-[var(--color-danger)] hover:text-red-700 p-2 rounded-full hover:bg-red-50 transition-all cursor-pointer z-10"
-                    title="Remove Advisor"
+                    title="Remove Founder"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -535,7 +535,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                     {/* Photo Picker Column */}
                     <div className="md:col-span-1 flex flex-col items-center justify-center space-y-3 border-r border-[var(--color-border)]/60 pr-4">
                       <label className="block text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] text-center">
-                        Advisor Photo
+                        Founder Photo
                       </label>
                       <div className="w-24 h-24 rounded-xl overflow-hidden bg-[var(--color-surface-alt)] border border-[var(--color-border)] flex items-center justify-center relative">
                         {advisor.photoUrl ? (

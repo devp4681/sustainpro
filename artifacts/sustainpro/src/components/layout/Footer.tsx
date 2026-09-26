@@ -60,11 +60,10 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4 text-lg">Quick Links</h3>
             <ul className="space-y-3 text-sm">
+              <li><Link href="/" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Home</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> About Us</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Services</Link></li>
               <li><Link href="/industries" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Industries Served</Link></li>
-              <li><Link href="/research" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Research & Innovation</Link></li>
-              <li><Link href="/software" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Software Solutions</Link></li>
               <li><Link href="/training" className="hover:text-primary transition-colors flex items-center gap-2"><ArrowRight className="h-3 w-3"/> Training & Events</Link></li>
             </ul>
           </div>
@@ -75,7 +74,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li><Link href="/services" className="hover:text-primary transition-colors">Process Engineering</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors">Modeling & Simulation</Link></li>
-              <li><Link href="/services" className="hover:text-primary transition-colors">Optimization & Troubleshooting</Link></li>
+              <li><Link href="/services" className="hover:text-primary transition-colors">Process Optimization</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors">Sustainability & Green Engineering</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors">Industrial R&D</Link></li>
             </ul>
@@ -104,10 +103,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-gray-800 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-col items-center md:items-start gap-1">
-            <p>&copy; {currentYear} {siteName} Process Solutions™. All Rights Reserved.</p>
-            <p className="text-xs text-gray-500">
-              Developed by <span className="font-medium text-gray-400">Chinmay Vaghela</span> (9408088823) &amp; <span className="font-medium text-gray-400">Dev Patel</span> (9824004681)
-            </p>
+            <p>&copy; {currentYear} {siteName.includes("LLP") ? siteName : `${siteName} Process SolutionTM LLP`}. All Rights Reserved.</p>
           </div>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>

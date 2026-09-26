@@ -287,77 +287,77 @@ export default function CrudList({
             const metaCols = tableColumns.filter(c => c.key !== titleCol.key && c.key !== "icon");
 
             return (
-              <div
-                key={item.id || idx}
-                className="bg-white p-9 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group h-full"
-              >
-                {/* Top Content */}
-                <div className="flex-grow">
-                  {/* Icon + Order badge */}
-                  <div className="flex items-start justify-between mb-7">
-                    <div className="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <LucideIcon className="w-7 h-7" />
+                <div
+                  key={item.id || idx}
+                  className="bg-[var(--color-surface)] p-8 md:p-9 rounded-2xl border border-[var(--color-border)] shadow-sm hover:shadow-xl hover:shadow-[var(--color-primary)]/5 hover:border-[var(--color-primary)]/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group h-full"
+                >
+                  {/* Top Content */}
+                  <div className="flex-grow">
+                    {/* Icon + Order badge */}
+                    <div className="flex items-start justify-between mb-7">
+                      <div className="w-14 h-14 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-2xl flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:text-white transition-all duration-300">
+                        <LucideIcon className="w-7 h-7" />
+                      </div>
+                      {item.order !== undefined && (
+                        <span className="text-[11px] font-semibold text-[var(--color-text-muted)] bg-[var(--color-surface-hover)] border border-[var(--color-border)] px-3 py-1.5 rounded-full">
+                          #{item.order}
+                        </span>
+                      )}
                     </div>
-                    {item.order !== undefined && (
-                      <span className="text-[11px] font-semibold text-[var(--color-text-muted)] bg-gray-100 px-3 py-1.5 rounded-full">
-                        #{item.order}
-                      </span>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 tracking-tight group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+                      {titleVal}
+                    </h3>
+
+                    {/* Description */}
+                    {descVal ? (
+                      <p className="text-[15px] text-[var(--color-text-muted)] leading-relaxed mb-6 line-clamp-3">
+                        {descVal}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-[var(--color-text-muted)]/60 italic mb-6">
+                        No description provided
+                      </p>
                     )}
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 tracking-tight group-hover:text-primary transition-colors leading-snug">
-                    {titleVal}
-                  </h3>
-
-                  {/* Description */}
-                  {descVal ? (
-                    <p className="text-[15px] text-[var(--color-text-muted)] leading-relaxed mb-6 line-clamp-3">
-                      {descVal}
-                    </p>
-                  ) : (
-                    <p className="text-sm text-gray-400 italic mb-6">
-                      No description provided
-                    </p>
-                  )}
-                </div>
-
-                {/* Footer: Metadata + Actions */}
-                <div className="mt-auto pt-5 border-t border-gray-100 space-y-3">
-                  {metaCols.map(col => {
-                    const val = item[col.key];
-                    if (val === undefined || val === null || val === "" || val === "—") return null;
-                    return (
-                      <div key={col.key} className="flex justify-between items-center gap-4">
-                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">{col.label}</span>
-                        <span className="text-[13px] text-[var(--color-text)] font-semibold truncate max-w-[200px]" title={val}>
-                          {col.render ? col.render(val, item) : String(val)}
-                        </span>
-                      </div>
-                    );
-                  })}
-                  
-                  {/* Action Buttons */}
-                  <div className="flex items-center justify-end gap-3 pt-3">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => startEdit(item)}
-                      className="px-5 py-2.5 text-[13px] font-semibold rounded-full"
-                    >
-                      <Pencil className="w-3.5 h-3.5" />
-                      Edit
-                    </Button>
-                    <button
-                      onClick={() => setDeleteId(item.id)}
-                      className="h-10 w-10 flex items-center justify-center rounded-full text-[var(--color-danger)] hover:bg-[var(--color-danger-light)] border border-gray-200 hover:border-red-200 transition-all cursor-pointer"
-                      title="Delete"
-                    >
-                      <Trash2 className="w-4.5 h-4.5" />
-                    </button>
+                  {/* Footer: Metadata + Actions */}
+                  <div className="mt-auto pt-5 border-t border-[var(--color-border)] space-y-3">
+                    {metaCols.map(col => {
+                      const val = item[col.key];
+                      if (val === undefined || val === null || val === "" || val === "—") return null;
+                      return (
+                        <div key={col.key} className="flex justify-between items-center gap-4">
+                          <span className="text-[11px] font-bold text-[var(--color-text-muted)] uppercase tracking-wider">{col.label}</span>
+                          <span className="text-[13px] text-[var(--color-text)] font-semibold truncate max-w-[200px]" title={val}>
+                            {col.render ? col.render(val, item) : String(val)}
+                          </span>
+                        </div>
+                      );
+                    })}
+                    
+                    {/* Action Buttons */}
+                    <div className="flex items-center justify-end gap-3 pt-3">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => startEdit(item)}
+                        className="px-5 py-2.5 text-[13px] font-semibold rounded-full"
+                      >
+                        <Pencil className="w-3.5 h-3.5" />
+                        Edit
+                      </Button>
+                      <button
+                        onClick={() => setDeleteId(item.id)}
+                        className="h-10 w-10 flex items-center justify-center rounded-full text-[var(--color-danger)] hover:bg-[var(--color-danger-light)] border border-[var(--color-border)] hover:border-red-200 transition-all cursor-pointer"
+                        title="Delete"
+                      >
+                        <Trash2 className="w-4.5 h-4.5" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
             );
           })}
         </div>

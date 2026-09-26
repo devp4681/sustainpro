@@ -2,32 +2,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1d7a22;
-  --color-primary-light: #2e9e33;
-  --color-primary-dark: #145517;
-  --color-accent: #1d5ca6;
-  --color-accent-light: #3a80cc;
-  --color-accent-dark: #133d6e;
+  --color-primary: #0c4585;
+  --color-primary-light: #185ba5;
+  --color-primary-dark: #072d57;
+  --color-accent: #0284c7;
+  --color-accent-light: #38bdf8;
+  --color-accent-dark: #0369a1;
   --color-surface: #ffffff;
-  --color-surface-alt: #f9fafb;
-  --color-surface-hover: #f3f4f6;
-  --color-border: #e5e7eb;
-  --color-text: #111827;
-  --color-text-muted: #4b5563;
+  --color-surface-alt: #f0f5fc;
+  --color-surface-hover: #e3effc;
+  --color-border: #d4e3f3;
+  --color-text: #091e3a;
+  --color-text-muted: #4a678a;
   --color-danger: #ef4444;
   --color-danger-light: #fef2f2;
-  --color-success: #22c55e;
+  --color-success: #10b981;
   --color-success-light: #f0fdf4;
   --color-warning: #f59e0b;
   --color-warning-light: #fffbeb;
-  --color-info: #3b82f6;
-  --color-info-light: #eff6ff;
+  --color-info: #0284c7;
+  --color-info-light: #f0f9ff;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
 }
 
 /* Base resets live in @layer base so Tailwind utilities (@layer utilities)
-   can override them — un-layered rules would beat every p-*/m-* utility. */
+   can override them — un-layered rules would beat every padding/margin utility. */
 @layer base {
   * {
     margin: 0;
@@ -53,18 +53,18 @@
   }
 }
 
-/* Dark mode overrides */
+/* Dark mode overrides - deep midnight navy & royal blue */
 .dark {
-  --color-surface: #1e293b;
-  --color-surface-alt: #0f172a;
-  --color-surface-hover: #334155;
-  --color-border: #334155;
-  --color-text: #f1f5f9;
-  --color-text-muted: #94a3b8;
+  --color-surface: #0a192f;
+  --color-surface-alt: #050f1d;
+  --color-surface-hover: #122849;
+  --color-border: #1a365d;
+  --color-text: #f0f7ff;
+  --color-text-muted: #8ca7c9;
   --color-danger-light: #450a0a;
   --color-success-light: #052e16;
   --color-warning-light: #451a03;
-  --color-info-light: #172554;
+  --color-info-light: #082f49;
 }
 
 /* Scrollbar styling */

@@ -14,7 +14,7 @@ export const siteSettings = sqliteTable("site_settings", {
 
 export const contactInfo = sqliteTable("contact_info", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  address: text("address").notNull().default("100 Innovation Drive\nIndustrial Park, Tech City 10001"),
+  address: text("address").notNull().default("K-501, Samarthya Status,\nSabarmati, Ahmedabad, 380019, India"),
   phone: text("phone").notNull().default("8735045762"),
   email: text("email").notNull().default("sustain.process@gmail.com"),
   googleMapsLink: text("google_maps_link"),

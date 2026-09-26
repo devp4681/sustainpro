@@ -79,50 +79,50 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 0 0% 100%;
-  --foreground: 215 28% 17%;
-  --border: 214 32% 91%;
+  --background: 210 25% 98%;
+  --foreground: 222 47% 11%;
+  --border: 214 20% 90%;
   
   --card: 0 0% 100%;
-  --card-foreground: 215 28% 17%;
-  --card-border: 214 32% 91%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 214 20% 90%;
 
   --sidebar: 210 20% 96%;
-  --sidebar-foreground: 215 28% 17%;
-  --sidebar-border: 214 32% 91%;
-  --sidebar-primary: 122 76% 31%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-border: 214 20% 90%;
+  --sidebar-primary: 214 84% 28%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 210 20% 90%;
-  --sidebar-accent-foreground: 215 28% 17%;
-  --sidebar-ring: 122 76% 31%;
+  --sidebar-accent: 210 20% 92%;
+  --sidebar-accent-foreground: 222 47% 11%;
+  --sidebar-ring: 214 84% 28%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 215 28% 17%;
-  --popover-border: 214 32% 91%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 214 20% 90%;
 
-  --primary: 122 76% 31%;
+  --primary: 214 84% 28%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 212 71% 40%;
+  --secondary: 154 75% 33%;
   --secondary-foreground: 0 0% 100%;
 
   --muted: 210 20% 96%;
   --muted-foreground: 215 16% 47%;
 
-  --accent: 210 20% 96%;
-  --accent-foreground: 215 28% 17%;
+  --accent: 210 25% 94%;
+  --accent-foreground: 214 84% 28%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 214 32% 91%;
-  --ring: 122 76% 31%;
+  --input: 214 20% 90%;
+  --ring: 214 84% 28%;
   
-  --chart-1: 122 76% 31%;
-  --chart-2: 212 71% 40%;
-  --chart-3: 215 28% 17%;
-  --chart-4: 210 20% 96%;
-  --chart-5: 142 71% 45%;
+  --chart-1: 214 84% 28%;
+  --chart-2: 154 75% 33%;
+  --chart-3: 199 89% 48%;
+  --chart-4: 215 28% 17%;
+  --chart-5: 210 20% 96%;
 
   --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: 'Playfair Display', serif;
@@ -181,50 +181,50 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 215 28% 17%;
-  --foreground: 0 0% 100%;
-  --border: 215 20% 25%;
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --border: 217 33% 17%;
   
-  --card: 215 28% 17%;
-  --card-foreground: 0 0% 100%;
-  --card-border: 215 20% 25%;
+  --card: 217 33% 14%;
+  --card-foreground: 210 40% 98%;
+  --card-border: 217 33% 17%;
 
-  --sidebar: 215 28% 15%;
-  --sidebar-foreground: 0 0% 100%;
-  --sidebar-border: 215 20% 25%;
-  --sidebar-primary: 122 76% 31%;
+  --sidebar: 222 47% 10%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-border: 217 33% 17%;
+  --sidebar-primary: 214 84% 45%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 215 20% 25%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 122 76% 31%;
+  --sidebar-accent: 217 33% 17%;
+  --sidebar-accent-foreground: 210 40% 98%;
+  --sidebar-ring: 214 84% 45%;
 
-  --popover: 215 28% 17%;
-  --popover-foreground: 0 0% 100%;
-  --popover-border: 215 20% 25%;
+  --popover: 217 33% 14%;
+  --popover-foreground: 210 40% 98%;
+  --popover-border: 217 33% 17%;
 
-  --primary: 122 76% 31%;
+  --primary: 214 84% 45%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 212 71% 40%;
+  --secondary: 154 70% 40%;
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 215 20% 25%;
-  --muted-foreground: 210 20% 75%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
 
-  --accent: 215 20% 25%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 215 20% 25%;
-  --ring: 122 76% 31%;
+  --input: 217 33% 17%;
+  --ring: 214 84% 45%;
   
-  --chart-1: 122 76% 31%;
-  --chart-2: 212 71% 40%;
-  --chart-3: 210 20% 96%;
+  --chart-1: 214 84% 45%;
+  --chart-2: 154 70% 40%;
+  --chart-3: 199 89% 48%;
   --chart-4: 215 20% 25%;
-  --chart-5: 142 71% 45%;
+  --chart-5: 210 20% 96%;
 
   --shadow-2xs: 0px 2px 0px 0px rgba(0,0,0,0.2);
   --shadow-xs: 0px 2px 0px 0px rgba(0,0,0,0.2);
@@ -243,6 +243,53 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    cursor: default;
+  }
+
+  /* Left-aligned and justified text for content areas */
+  p, li, td, th, dd, blockquote {
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+  }
+
+  /* Default arrow cursor for layout containers and non-text elements */
+  body, div, section, article, aside, header, footer, main, nav, figure, table, tr, img, svg, canvas, video {
+    cursor: default;
+  }
+
+  /* When content is not selectable, the cursor should show an arrow instead of a text-selection cursor */
+  [class*="select-none"],
+  [style*="user-select: none"],
+  [style*="user-select:none"],
+  [unselectable="on"],
+  [aria-hidden="true"],
+  .select-none,
+  .select-none * {
+    cursor: default !important;
+  }
+
+  /* Standard text-selection cursor for selectable text content */
+  p, h1, h2, h3, h4, h5, h6, li, td, th, dd, dt, blockquote, span:not([class*="select-none"]) {
+    cursor: text;
+  }
+
+  /* Pointer cursor strictly for interactive elements */
+  a, a *, button, button *, [role="button"], [role="button"] *,
+  input[type="submit"], input[type="button"], input[type="reset"],
+  label[for], summary, [tabindex]:not([tabindex="-1"]), select,
+  input[type="checkbox"], input[type="radio"], input[type="file"] {
+    cursor: pointer;
+  }
+
+  /* Text cursor for editable form inputs */
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="search"], input[type="tel"], input[type="url"],
+  input[type="number"], textarea, [contenteditable="true"] {
+    cursor: text;
   }
 }
 

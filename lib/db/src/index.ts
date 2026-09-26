@@ -92,15 +92,15 @@ export const db = drizzle(sqliteDb, { schema });
 // Seed default dynamic pages if they don't exist
 try {
   const defaults = [
-    { slug: "home", title: "Home", subtitle: "SustainPro Homepage", heroImage: "/hero-bg.png" },
-    { slug: "about", title: "About Us", subtitle: "Engineering a greener tomorrow", heroImage: "/about-bg.png" },
-    { slug: "services", title: "Our Services", subtitle: "Comprehensive Engineering Solutions", heroImage: "/hero-bg.png" },
-    { slug: "industries", title: "Industries We Serve", subtitle: "Global Industrial Expertise", heroImage: "/about-bg.png" },
-    { slug: "research", title: "Research & Development", subtitle: "Pioneering Sustainable Innovation", heroImage: "/research-bg.png" },
-    { slug: "software", title: "Software Solutions", subtitle: "Advanced Process Modeling Tools", heroImage: "/about-bg.png" },
-    { slug: "training", title: "Training Programs", subtitle: "Empowering Your Engineering Team", heroImage: "/about-bg.png" },
-    { slug: "careers", title: "Careers", subtitle: "Join Our Dynamic Team", heroImage: "/about-bg.png" },
-    { slug: "contact", title: "Contact Us", subtitle: "Get in touch with our experts", heroImage: "/about-bg.png" }
+    { slug: "home", title: "Home", subtitle: "SustainPro Homepage", heroImage: "/hero-bg.png", order: 0, showInMenu: true, isActive: true },
+    { slug: "about", title: "About Us", subtitle: "Engineering a greener tomorrow", heroImage: "/about-bg.png", order: 1, showInMenu: true, isActive: true },
+    { slug: "services", title: "Our Services", subtitle: "Comprehensive Engineering Solutions", heroImage: "/hero-bg.png", order: 2, showInMenu: true, isActive: true },
+    { slug: "industries", title: "Industries We Serve", subtitle: "Global Industrial Expertise", heroImage: "/about-bg.png", order: 3, showInMenu: true, isActive: true },
+    { slug: "research", title: "Research & Development", subtitle: "Pioneering Sustainable Innovation", heroImage: "/research-bg.png", order: 4, showInMenu: true, isActive: true },
+    { slug: "training", title: "Training Programs", subtitle: "Empowering Your Engineering Team", heroImage: "/about-bg.png", order: 5, showInMenu: true, isActive: true },
+    { slug: "careers", title: "Careers", subtitle: "Join Our Dynamic Team", heroImage: "/about-bg.png", order: 6, showInMenu: true, isActive: true },
+    { slug: "contact", title: "Contact Us", subtitle: "Get in touch with our experts", heroImage: "/about-bg.png", order: 7, showInMenu: false, isActive: true },
+    { slug: "software", title: "Software Solutions", subtitle: "Advanced Process Modeling Tools", heroImage: "/about-bg.png", order: 8, showInMenu: false, isActive: false }
   ];
 
   for (const page of defaults) {
@@ -112,8 +112,9 @@ try {
         subtitle: page.subtitle,
         description: "",
         heroImage: page.heroImage,
-        isActive: true,
-        showInMenu: true,
+        isActive: page.isActive ?? true,
+        showInMenu: page.showInMenu ?? true,
+        order: page.order ?? 0,
         seoTitle: page.title,
         sections: [],
         gallery: []

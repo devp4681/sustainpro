@@ -15,11 +15,11 @@ export function Navbar() {
   }, []);
 
   const defaultLinks = [
+    { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
     { href: "/services", label: "Services" },
     { href: "/industries", label: "Industries" },
     { href: "/research", label: "Research" },
-    { href: "/software", label: "Software" },
     { href: "/training", label: "Training" },
     { href: "/careers", label: "Careers" },
   ];
@@ -44,21 +44,55 @@ export function Navbar() {
     }
   });
 
-  const pageLinks = dynamicPages
-    .filter(p => p.showInMenu !== false && p.slug !== "home")
-    .map(p => ({
-      href: `/${p.slug}`,
-      label: p.title
-    }));
+  // Canonical tab sequence: Home -> About Us -> Services -> Industries -> Research -> Training -> Careers (Careers strictly last)
+  const tabOrder = ["home", "about", "services", "industries", "research", "training", "careers"];
 
-  const activeLinks = dynamicLinks.length > 0
-    ? dynamicLinks.map(link => ({ href: link.href, label: link.label }))
-    : dynamicPages.length > 0
-    ? pageLinks
-    : defaultLinks;
+  let baseLinks: { href: string; label: string; slug: string }[] = [];
+
+  if (dynamicLinks.length > 0) {
+    baseLinks = dynamicLinks.map(l => ({
+      href: l.href,
+      label: l.label,
+      slug: l.href.replace(/^\//, "").toLowerCase() || "home"
+    }));
+  } else if (dynamicPages.length > 0) {
+    baseLinks = [
+      { href: "/", label: "Home", slug: "home" },
+      ...dynamicPages
+        .filter(p => p.showInMenu !== false && p.slug !== "home" && p.slug !== "software" && p.slug !== "contact")
+        .map(p => ({
+          href: `/${p.slug}`,
+          label: p.slug === "about" ? "About Us" : (p.slug === "services" ? "Services" : (p.slug === "industries" ? "Industries" : (p.slug === "training" ? "Training" : (p.slug === "careers" ? "Careers" : p.title)))),
+          slug: p.slug.toLowerCase()
+        }))
+    ];
+  } else {
+    baseLinks = defaultLinks.map(l => ({
+      ...l,
+      slug: l.href.replace(/^\//, "").toLowerCase() || "home"
+    }));
+  }
+
+  // Filter out software and contact (contact has its own primary button)
+  const filteredLinks = baseLinks.filter(l => l.slug !== "software" && l.slug !== "contact");
+
+  // Keep Careers strictly at the very end
+  const nonCareerLinks = filteredLinks.filter(l => l.slug !== "careers");
+  const careerLink = filteredLinks.find(l => l.slug === "careers") || { href: "/careers", label: "Careers", slug: "careers" };
+
+  nonCareerLinks.sort((a, b) => {
+    const idxA = tabOrder.indexOf(a.slug);
+    const idxB = tabOrder.indexOf(b.slug);
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+    return 0;
+  });
+
+  const activeLinks = [...nonCareerLinks, careerLink];
 
   return (
-    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-2" : "bg-white py-4"}`}>
+    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 border-b border-slate-200/70 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-xs py-2" : "bg-white py-3.5"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0 flex items-center">
@@ -71,14 +105,14 @@ export function Navbar() {
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-4">
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-3">
             {activeLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-600 hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-gray-50">
+              <Link key={link.href} href={link.href} className="text-sm font-semibold text-slate-700 hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-slate-100/70">
                 {link.label}
               </Link>
             ))}
-            <Link href="/contact" className="ml-4">
-              <Button size="sm" className="bg-primary hover:bg-primary/90 text-white font-medium shadow-sm">
+            <Link href="/contact" className="ml-3">
+              <Button size="sm" className="bg-primary hover:bg-primary/90 text-white font-medium shadow-xs px-4">
                 Contact Us <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

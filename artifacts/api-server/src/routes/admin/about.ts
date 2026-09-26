@@ -13,11 +13,11 @@ router.get("/about", async (req, res) => {
       // Defaults if not seeded
       content = {
         id: 1,
-        heroTitle: "About SustainPro",
+        heroTitle: "SustainPro Process SolutionTM LLP",
         heroSubtitle: "Engineering a greener tomorrow through innovative process solutions, technical excellence, and sustainable practices.",
         heroBgImage: "/about-bg.png",
         whoWeAreTitle: "Who We Are",
-        whoWeAreText: "SustainPro Process Solutions™ is a premium global engineering consultancy. We specialize in chemical engineering, process optimization, and sustainable industrial innovation. Our team of world-class experts partners with industries to enhance efficiency, reduce environmental impact, and pioneer green technologies.",
+        whoWeAreText: "SustainPro Process SolutionTM LLP is a premium global engineering consultancy. We specialize in chemical engineering, process optimization, and sustainable industrial innovation. Our team of leading experts collaborates with industries to improve efficiency, minimize environmental impact, and advance innovative green technologies.",
         visionTitle: "Our Vision",
         visionText: "To be the global leader in driving the industrial transition towards sustainable and highly optimized processes.",
         missionTitle: "Our Mission",
@@ -25,7 +25,7 @@ router.get("/about", async (req, res) => {
         valuesTitle: "Core Values",
         valuesText: "Integrity, innovation, sustainability, and technical excellence form the foundation of every project we undertake.",
         leadershipTitle: "Leadership",
-        leadershipText: "Guided by industry veterans with decades of combined experience in high-stakes chemical engineering and R&D.",
+        leadershipText: "Led by academicians with strong expertise in chemical engineering and extensive experience in industry-focused research, consultancy, and R&D.",
         advisors: [],
         updatedAt: new Date().toISOString(),
       };

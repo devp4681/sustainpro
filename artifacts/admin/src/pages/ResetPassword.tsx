@@ -37,19 +37,19 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f766e] via-[#115e59] to-[#134e4a] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#06182e] via-[#0a335c] to-[#0c4585] p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md mb-4">
-            <Leaf className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md mb-4 shadow-xl">
+            <Leaf className="w-8 h-8 text-sky-300" />
           </div>
           <h1 className="text-2xl font-bold text-white">Set New Password</h1>
         </div>
 
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20">
           {done ? (
             <div className="text-center space-y-4">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+              <CheckCircle className="w-16 h-16 text-sky-500 mx-auto" />
               <h3 className="text-lg font-semibold text-gray-900">Password Updated!</h3>
               <p className="text-sm text-gray-500">Your password has been successfully reset.</p>
               <Button onClick={() => navigate("/admin/login")} className="w-full">

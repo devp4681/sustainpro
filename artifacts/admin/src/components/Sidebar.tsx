@@ -117,7 +117,7 @@ export default function Sidebar({ collapsed, onToggle, onNavigate }: SidebarProp
                 "transition-all duration-300 no-underline relative group",
                 isActive
                   ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-white shadow-md shadow-[var(--color-primary)]/20"
-                  : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text)] hover:translate-x-1.5",
+                  : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-primary)] hover:translate-x-1.5",
                 collapsed 
                   ? "justify-center p-3 mx-2 hover:translate-x-0" 
                   : "gap-3.5 px-4 py-3.5"

@@ -42,20 +42,24 @@ type PageData = {
 
 // ─── Card Wrapper Helper ───────────────────────────────────────────────────
 function CardWrapper({ link, children, className }: { link?: string; children: React.ReactNode; className?: string }) {
-  if (!link) {
-    return <section className={className}>{children}</section>;
+  const hasLink = Boolean(link && link.trim() && link !== "#");
+  const cleanClass = className?.replace(/\bcursor-pointer\b/g, "").trim();
+  const effectiveClass = hasLink ? `${cleanClass} cursor-pointer` : cleanClass;
+
+  if (!hasLink) {
+    return <section className={effectiveClass}>{children}</section>;
   }
-  const isExternal = link.startsWith("http://") || link.startsWith("https://") || link.startsWith("//");
+  const isExternal = link!.startsWith("http://") || link!.startsWith("https://") || link!.startsWith("//");
   if (isExternal) {
     return (
       <a href={link} target="_blank" rel="noopener noreferrer" className="block no-underline group">
-        <section className={className}>{children}</section>
+        <section className={effectiveClass}>{children}</section>
       </a>
     );
   }
   return (
-    <Link href={link} className="block no-underline group">
-      <section className={className}>{children}</section>
+    <Link href={link!} className="block no-underline group">
+      <section className={effectiveClass}>{children}</section>
     </Link>
   );
 }
@@ -115,11 +119,14 @@ function AboutSection() {
         if (advisors.length === 0) return null;
         return (
           <section className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-sm mt-8">
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-2 text-center">Faculty Advisors</h2>
-            <p className="text-gray-500 text-sm text-center mb-10 max-w-xl mx-auto">Guided by leading academic professors specializing in chemical engineering, catalysis, process modeling, and sustainability.</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-gray-900 mb-8 text-left">Founders</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {advisors.map((advisor: any, idx: number) => (
+              {advisors.map((advisor: any, idx: number) => {
+                const displayName = advisor.name?.startsWith(`${idx + 1}. `)
+                  ? advisor.name
+                  : `${idx + 1}. ${advisor.name?.replace(/^\d+\.\s*/, "")}`;
+                return (
                 <a 
                   key={idx} 
                   href={advisor.link || "#"} 
@@ -135,18 +142,19 @@ function AboutSection() {
                     />
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors flex items-center gap-1.5">
-                        {advisor.name}
+                        {displayName}
                         {advisor.link && <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100" />}
                       </h3>
                       <p className="text-sm font-semibold text-primary/95 mt-1">{advisor.title}</p>
                       <p className="text-xs text-gray-500 font-medium">{advisor.institution}</p>
-                      <p className="text-sm text-gray-600 leading-relaxed mt-3">
+                      <p className="text-sm text-gray-600 leading-relaxed mt-3 text-justify">
                         {advisor.bio}
                       </p>
                     </div>
                   </div>
                 </a>
-              ))}
+              );
+              })}
             </div>
           </section>
         );
@@ -184,6 +192,61 @@ function CareersSection() {
     message: "",
     cv: null,
   });
+
+  const [resumeForm, setResumeForm] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    message: string;
+    cv: File | null;
+  }>({
+    name: "",
+    email: "",
+    phone: "",
+    city: "",
+    message: "",
+    cv: null,
+  });
+  const [resumeSubmitting, setResumeSubmitting] = useState(false);
+  const [resumeSuccess, setResumeSuccess] = useState(false);
+
+  const handleResumeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResumeSubmitting(true);
+    try {
+      const formData = new FormData();
+      formData.append("name", resumeForm.name);
+      formData.append("email", resumeForm.email);
+      formData.append("phone", resumeForm.phone);
+      formData.append("city", resumeForm.city);
+      formData.append("address", "");
+      formData.append("jobTitle", "General Application");
+      formData.append("message", resumeForm.message);
+      if (resumeForm.cv) {
+        formData.append("cv", resumeForm.cv);
+      }
+
+      const res = await fetch("/api/careers/apply", {
+        method: "POST",
+        body: formData,
+      });
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Submission failed");
+      }
+      setResumeSuccess(true);
+      setResumeForm({ name: "", email: "", phone: "", city: "", message: "", cv: null });
+      setTimeout(() => {
+        setResumeSuccess(false);
+      }, 5000);
+    } catch (err: any) {
+      alert(err.message || "Failed to submit resume. Please try again.");
+    } finally {
+      setResumeSubmitting(false);
+    }
+  };
+
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -235,10 +298,10 @@ function CareersSection() {
   return (
     <div className="space-y-8">
       {positions.length === 0 ? (
-        <section className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-sm text-center">
-          <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+        <section className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-sm text-left">
+          <Briefcase className="w-12 h-12 text-gray-400 mb-4" />
           <h2 className="text-xl font-bold text-gray-900 mb-2">No Open Positions</h2>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <p className="text-gray-600 max-w-xl">
             We don't have any job openings right now. However, we're always looking for outstanding talent. Feel free to send your CV to <span className="font-semibold text-primary">sustain.process@gmail.com</span>.
           </p>
         </section>
@@ -270,6 +333,94 @@ function CareersSection() {
           ))}
         </div>
       )}
+
+      {/* Standalone Resume Upload Form */}
+      <section className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-sm">
+        <div className="flex flex-col items-start text-left mb-8">
+          <div className="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-4">
+            <Icons.Upload className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Submit Your Resume</h2>
+          <p className="text-gray-600 max-w-xl">
+            Interested in joining our team? Upload your resume and we'll reach out when a suitable opportunity arises.
+          </p>
+        </div>
+        {resumeSuccess ? (
+          <div className="bg-emerald-50 text-emerald-800 p-6 rounded-xl text-left font-medium">
+            <CheckCircle className="w-8 h-8 mb-2 text-emerald-600" />
+            Resume submitted successfully! Thank you for your interest.
+          </div>
+        ) : (
+          <form onSubmit={handleResumeSubmit} className="max-w-xl space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+                <input
+                  type="text"
+                  value={resumeForm.name}
+                  onChange={(e) => setResumeForm({ ...resumeForm, name: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                <input
+                  type="email"
+                  value={resumeForm.email}
+                  onChange={(e) => setResumeForm({ ...resumeForm, email: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white"
+                  required
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Contact Number</label>
+                <input
+                  type="text"
+                  value={resumeForm.phone}
+                  onChange={(e) => setResumeForm({ ...resumeForm, phone: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">City</label>
+                <input
+                  type="text"
+                  value={resumeForm.city}
+                  onChange={(e) => setResumeForm({ ...resumeForm, city: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Upload Resume (PDF, Word)</label>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => setResumeForm({ ...resumeForm, cv: e.target.files?.[0] || null })}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white text-sm"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Brief Introduction (Optional)</label>
+              <textarea
+                value={resumeForm.message}
+                onChange={(e) => setResumeForm({ ...resumeForm, message: e.target.value })}
+                placeholder="Tell us about your background and experience..."
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-gray-900 bg-white h-24"
+              />
+            </div>
+            <Button type="submit" disabled={resumeSubmitting} className="w-full bg-primary hover:bg-primary/90 text-white mt-2">
+              {resumeSubmitting ? "Submitting..." : "Submit Resume"}
+            </Button>
+          </form>
+        )}
+      </section>
 
       {/* Application Modal */}
       {applicationModal.isOpen && (
@@ -388,7 +539,7 @@ function ServicesSection() {
           ? service.details
           : (typeof service.details === "string" ? JSON.parse(service.details || "[]") : []);
         return (
-          <CardWrapper key={service.id} link={service.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full cursor-pointer">
+          <CardWrapper key={service.id} link={service.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
             <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <LucideIcon className="w-7 h-7" />
             </div>
@@ -425,7 +576,7 @@ function IndustriesSection() {
       {industriesList.map((industry) => {
         const LucideIcon = (Icons as any)[industry.icon] || Icons.Factory;
         return (
-          <CardWrapper key={industry.id} link={industry.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full cursor-pointer">
+          <CardWrapper key={industry.id} link={industry.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
             <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <LucideIcon className="w-7 h-7" />
             </div>
@@ -531,7 +682,7 @@ function SoftwareSection() {
       {softwareList.map((item) => {
         const LucideIcon = (Icons as any)[item.icon] || Icons.Monitor;
         return (
-          <CardWrapper key={item.id} link={item.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full cursor-pointer">
+          <CardWrapper key={item.id} link={item.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
             <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <LucideIcon className="w-7 h-7" />
             </div>
@@ -551,14 +702,24 @@ function TrainingSection() {
     queryFn: () => fetch("/api/content/training").then(r => r.json()),
   });
 
+  const { data: eventsList = [] } = useQuery<any[]>({
+    queryKey: ["content", "events"],
+    queryFn: async () => {
+      const res = await fetch("/api/events");
+      if (!res.ok) return [];
+      return res.json();
+    },
+  });
+
   if (trainingList.length === 0) return null;
 
   return (
+    <>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {trainingList.map((item) => {
         const LucideIcon = (Icons as any)[item.icon] || Icons.GraduationCap;
         return (
-          <CardWrapper key={item.id} link={item.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full cursor-pointer">
+          <CardWrapper key={item.id} link={item.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
             <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <LucideIcon className="w-7 h-7" />
             </div>
@@ -568,6 +729,63 @@ function TrainingSection() {
         );
       })}
     </div>
+
+    {/* Upcoming Programs */}
+    <section className="bg-white p-8 md:p-12 rounded-2xl border border-slate-200/80 shadow-sm mt-10">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
+          <Icons.CalendarDays className="w-6 h-6" />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 text-left">Upcoming Programs</h2>
+      </div>
+      <p className="text-gray-600 leading-relaxed text-left mb-8">
+        Stay updated with our upcoming training programs, workshops, and courses.
+      </p>
+
+      {eventsList.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {eventsList.map((event: any) => (
+            <div
+              key={event.id}
+              className="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+                    {event.type || "Program"}
+                  </span>
+                  {event.date && (
+                    <span className="text-xs text-gray-500 font-medium flex items-center gap-1">
+                      <Icons.Calendar className="w-3.5 h-3.5 text-gray-400" />
+                      {event.date}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  {event.title?.replace(/^Advanced\s+/i, "")}
+                </h3>
+                {event.description && (
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    {event.description}
+                  </p>
+                )}
+              </div>
+              {event.venue && (
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 pt-4 border-t border-slate-200/60 mt-4">
+                  <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                  <span className="truncate">{event.venue}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500 text-sm italic">
+          Stay tuned for our upcoming training programs, workshops, and courses. New programs will be announced here.
+        </p>
+      )}
+    </section>
+    </>
   );
 }
 
@@ -706,10 +924,10 @@ function HomepageGallery() {
   return (
     <>
       <section className="bg-white p-8 md:p-12 rounded-2xl border border-gray-200 shadow-sm">
-        <div className="text-center mb-10">
-          <p className="text-primary font-semibold tracking-wider uppercase text-sm mb-2">Our Gallery</p>
+        <div className="text-left mb-10">
+          <p className="text-secondary font-semibold tracking-wider uppercase text-sm mb-2">Our Gallery</p>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900">Photo Gallery</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">A glimpse into our projects, facilities, and team in action.</p>
+          <p className="text-gray-500 mt-3 max-w-2xl text-justify text-left">A glimpse into our projects, facilities, and team in action.</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {photos.map((photo: any, idx: number) => (
@@ -789,7 +1007,7 @@ function HomeSection() {
   return (
     <div className="space-y-16">
       {/* Stats bar */}
-      <section className="bg-primary text-white py-12 rounded-2xl">
+      <section className="bg-gradient-to-r from-[#0a335c] via-[#0c4585] to-[#0a335c] text-white py-12 rounded-2xl shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20 px-8">
           {stats.map((stat: any, i: number) => (
             <div key={i}>
@@ -803,18 +1021,18 @@ function HomeSection() {
       {/* Services preview */}
       {displayServices.length > 0 && (
         <section>
-          <div className="text-center mb-10">
-            <p className="text-primary font-semibold tracking-wider uppercase text-sm mb-2">Our Expertise</p>
+          <div className="text-left mb-10">
+            <p className="text-secondary font-semibold tracking-wider uppercase text-sm mb-2">Our Expertise</p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900">
               {homeContent?.servicesTitle || "Comprehensive Engineering Solutions"}
             </h2>
-            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">{homeContent?.servicesSubtitle}</p>
+            <p className="text-gray-500 mt-3 max-w-2xl">{homeContent?.servicesSubtitle}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {displayServices.map((service: any) => {
               const LucideIcon = (Icons as any)[service.icon] || Icons.Settings;
               return (
-                <CardWrapper key={service.id} link={service.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group cursor-pointer h-full">
+                <CardWrapper key={service.id} link={service.link} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
                   <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                     <LucideIcon className="w-6 h-6" />
                   </div>
@@ -836,16 +1054,16 @@ function HomeSection() {
 
       {/* Sustainability CTA */}
       {homeContent?.sustainabilityTitle && (
-        <section className="bg-gradient-to-r from-primary/5 to-primary/10 p-10 md:p-14 rounded-2xl border border-primary/20">
+        <section className="bg-gradient-to-br from-slate-100 via-white to-emerald-50/30 p-10 md:p-14 rounded-2xl border border-slate-200/80 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{homeContent.sustainabilityTitle || "Pioneering the Transition to Efficient and Sustainable Solutions"}</h2>
-              <p className="text-gray-600 leading-relaxed">{homeContent.sustainabilityText || "At SustainPro Process Solutions LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future."}</p>
+              <p className="text-gray-600 leading-relaxed">{homeContent.sustainabilityText || "At SustainPro Process SolutionTM LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future."}</p>
             </div>
             <ul className="space-y-3">
               {(homeContent.sustainabilityItems || ["Engineering Solutions", "Process Excellence", "Sustainability", "Training and Consulting"]).map((item: string, i: number) => (
                 <li key={i} className="flex items-center gap-3 text-gray-700">
-                  <CheckCircle className="w-5 h-5 text-primary shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-secondary shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -859,9 +1077,9 @@ function HomeSection() {
 
       {/* Final CTA */}
       {homeContent?.ctaTitle && (
-        <section className="text-center bg-primary text-white p-10 md:p-14 rounded-2xl">
+        <section className="text-left bg-gradient-to-r from-[#0a335c] via-[#0c4585] to-[#0a335c] text-white p-10 md:p-14 rounded-2xl shadow-sm">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{homeContent.ctaTitle}</h2>
-          <p className="text-white/80 max-w-xl mx-auto mb-6">{homeContent.ctaSubtitle}</p>
+          <p className="text-white/80 max-w-xl mb-6 text-justify text-left">{homeContent.ctaSubtitle}</p>
           <Link href="/contact">
             <Button className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3 cursor-pointer">
               Get in Touch <ArrowRight className="ml-2 w-4 h-4" />
@@ -953,7 +1171,7 @@ export default function DynamicPage({ params }: { params: { slug: string } }) {
   const SlugContentSection = SLUG_CONTENT_MAP[slug];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen pb-20 bg-slate-50/70">
       {/* Hero: slider for home, banner for all others */}
       {slug === "home" ? (
         <HeroSlider />

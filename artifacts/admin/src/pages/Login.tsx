@@ -42,30 +42,30 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0c2f13] via-[#124c1c] to-[#1c6e26] p-4 font-sans selection:bg-green-500/30 selection:text-green-200 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#06182e] via-[#0a335c] to-[#0c4585] p-4 font-sans selection:bg-sky-500/30 selection:text-sky-200 relative overflow-hidden">
       {/* Dynamic background decorations */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl -z-10 animate-pulse-soft"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -z-10 animate-pulse-soft" style={{ animationDelay: "1s" }}></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl -z-10 animate-pulse-soft"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl -z-10 animate-pulse-soft" style={{ animationDelay: "1s" }}></div>
 
       <div className="w-full max-w-md animate-fade-in relative z-10">
         {/* Logo area */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 border border-white/20 shadow-xl backdrop-blur-md mb-4 hover:scale-105 transition-transform duration-300">
-            <Leaf className="w-8 h-8 text-green-300" />
+            <Leaf className="w-8 h-8 text-sky-300" />
           </div>
           <h1 className="text-3.5xl font-bold text-white font-serif tracking-tight">SustainPro</h1>
-          <p className="text-green-200/80 text-sm mt-1.5 font-medium uppercase tracking-wider">Control Center & CMS Dashboard</p>
+          <p className="text-sky-200/80 text-sm mt-1.5 font-medium uppercase tracking-wider">Control Center & CMS Dashboard</p>
         </div>
 
         {/* Login card */}
         <form
           onSubmit={handleSubmit}
           autoComplete="off"
-          className="bg-gray-950/40 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-8 space-y-6"
+          className="bg-slate-950/40 border border-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-8 space-y-6"
         >
           <div className="space-y-1.5">
             <h2 className="text-xl font-bold text-white font-serif">Administrator Login</h2>
-            <p className="text-xs text-green-200/60 font-medium">Enter your credentials below to authenticate</p>
+            <p className="text-xs text-sky-200/60 font-medium">Enter your credentials below to authenticate</p>
           </div>
 
           {error && (
@@ -78,7 +78,7 @@ export default function Login() {
           {/* Email input */}
           <div className="space-y-2">
             <label className="text-sm font-semibold text-gray-200 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-green-400" />
+              <Mail className="w-4 h-4 text-sky-400" />
               Email Address
             </label>
             <input
@@ -89,7 +89,7 @@ export default function Login() {
               autoComplete="off"
               autoFocus
               required
-              className="w-full px-4 py-3 rounded-xl text-sm bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-inner"
+              className="w-full px-4 py-3 rounded-xl text-sm bg-white/5 border border-white/10 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-200 shadow-inner"
             />
           </div>
 
@@ -97,7 +97,7 @@ export default function Login() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-gray-200 flex items-center gap-2">
-                <Lock className="w-4 h-4 text-green-400" />
+                <Lock className="w-4 h-4 text-sky-400" />
                 Password
               </label>
             </div>
@@ -109,7 +109,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
                 required
-                className="w-full px-4 py-3 pr-12 rounded-xl text-sm bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-inner"
+                className="w-full px-4 py-3 pr-12 rounded-xl text-sm bg-white/5 border border-white/10 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-200 shadow-inner"
               />
               <button
                 type="button"
@@ -128,13 +128,13 @@ export default function Login() {
                 type="checkbox"
                 checked={remember}
                 onChange={(e) => setRemember(e.target.checked)}
-                className="w-4 h-4 rounded border-white/10 bg-white/5 text-green-600 focus:ring-green-500/50 cursor-pointer"
+                className="w-4 h-4 rounded border-white/10 bg-white/5 text-[var(--color-primary)] focus:ring-sky-500/50 cursor-pointer"
               />
               <span className="text-sm text-gray-300 group-hover:text-white transition-colors">Remember me</span>
             </label>
             <Link
               href="/admin/forgot-password"
-              className="text-sm text-green-400 hover:text-green-300 hover:underline font-semibold no-underline transition-colors"
+              className="text-sm text-sky-400 hover:text-sky-300 hover:underline font-semibold no-underline transition-colors"
             >
               Forgot password?
             </Link>
@@ -144,7 +144,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-green-950/40 hover:shadow-green-400/10 hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full bg-gradient-to-r from-[#0c4585] to-[#185ba5] hover:from-[#0a3a70] hover:to-[#134d8f] text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-[#072d57]/50 hover:shadow-sky-500/20 hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? (
               <>
@@ -160,8 +160,8 @@ export default function Login() {
           </button>
         </form>
 
-        <p className="text-center text-green-200/40 text-xs mt-8 font-medium">
-          © {new Date().getFullYear()} SustainPro Process Solutions. All rights reserved.
+        <p className="text-center text-sky-200/40 text-xs mt-8 font-medium">
+          © {new Date().getFullYear()} SustainPro Process SolutionTM LLP. All rights reserved.
         </p>
       </div>
     </div>

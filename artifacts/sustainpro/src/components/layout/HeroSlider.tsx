@@ -31,8 +31,8 @@ export function HeroSlider() {
     {
       id: 0,
       imageUrl: homeContent?.heroBgImage || "/hero-bg.png",
-      title: homeContent?.heroTitle || "Advanced Process Optimization & Sustainable Solutions",
-      subtitle: homeContent?.heroSubtitle || "Global engineering consultancy specializing in chemical engineering, advanced modeling, and sustainable industrial innovation.",
+      title: (homeContent?.heroTitle || "Process Optimization & Sustainable Solutions").replace(/^Advanced\s+/i, ""),
+      subtitle: (homeContent?.heroSubtitle || "Global engineering consultancy specializing in chemical engineering, modeling, and sustainable industrial innovation.").replace(/advanced\s+/gi, ""),
       buttonText: "Explore Services",
       buttonLink: "/services",
       openInNewTab: false
@@ -88,8 +88,8 @@ export function HeroSlider() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 pointer-events-auto">
           <div className="max-w-3xl">
             {homeContent?.heroBadge && (
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                <Leaf className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500 shadow-sm">
+                <Leaf className="w-3.5 h-3.5 text-emerald-400" />
                 {homeContent.heroBadge}
               </div>
             )}
@@ -97,18 +97,18 @@ export function HeroSlider() {
             <h1 
               className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700"
               dangerouslySetInnerHTML={{ 
-                __html: (homeContent?.heroTitle || "Advanced Process Optimization & Sustainable Solutions")
-                  .replace("Optimization", '<span class="text-primary">Optimization</span>') 
+                __html: (homeContent?.heroTitle || "Process Optimization & Sustainable Solutions")
+                  .replace("Optimization", '<span class="text-emerald-400">Optimization</span>') 
               }}
             />
             
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
-              {homeContent?.heroSubtitle || "Global engineering consultancy specializing in chemical engineering, advanced modeling, and sustainable industrial innovation."}
+            <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+              {(homeContent?.heroSubtitle || "Global engineering consultancy specializing in chemical engineering, modeling, and sustainable industrial innovation.").replace(/advanced\s+/gi, "")}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
               <Link href="/services">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg h-auto shadow-lg shadow-primary/20 cursor-pointer">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg h-auto shadow-lg shadow-black/30 cursor-pointer border border-white/10">
                   Explore Services <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -141,8 +141,8 @@ export function HeroSlider() {
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
-                  idx === currentSlide ? "bg-primary w-8" : "bg-white/40 hover:bg-white/60"
+                className={`h-3 rounded-full transition-all cursor-pointer ${
+                  idx === currentSlide ? "bg-emerald-400 w-8" : "w-3 bg-white/40 hover:bg-white/60"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />

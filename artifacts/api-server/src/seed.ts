@@ -38,10 +38,10 @@ async function main() {
     console.log("Seeding site settings...");
     await db.insert(siteSettings).values({
       id: 1,
-      siteName: "SustainPro",
+      siteName: "SustainPro Process SolutionTM LLP",
       logoUrl: "/logo.jpeg",
       faviconUrl: "/favicon.ico",
-      seoTitle: "SustainPro Process Solutions",
+      seoTitle: "SustainPro Process SolutionTM LLP",
       seoDescription: "Engineering a Greener Tomorrow. Global engineering consultancy specializing in chemical engineering, process optimization, and sustainable industrial innovation.",
       socialLinks: {
         "linkedin": "https://linkedin.com/company/sustainpro"
@@ -52,7 +52,7 @@ async function main() {
     console.log("Seeding contact info...");
     await db.insert(contactInfo).values({
       id: 1,
-      address: "100 Innovation Drive\nIndustrial Park, Tech City 10001",
+      address: "K-501, Samarthya Status,\nSabarmati, Ahmedabad, 380019, India",
       phone: "8735045762",
       email: "sustain.process@gmail.com",
       googleMapsLink: "",
@@ -101,8 +101,33 @@ async function main() {
     await db.insert(homepageContent).values({
       id: 1,
       heroBadge: "Engineering a Greener Tomorrow",
-      heroTitle: "Advanced Process Optimization & Sustainable Solutions",
-      heroSubtitle: "Global engineering consultancy specializing in chemical engineering, advanced modeling, and sustainable industrial innovation.",
+      heroTitle: "Process Optimization & Sustainable Solutions",
+      heroSubtitle: "Global engineering consultancy specializing in chemical engineering, modeling, and sustainable industrial innovation.",
+    }).onConflictDoNothing();
+
+    // 5b. One-time data fix: update existing homepage heroTitle & heroSubtitle
+    const [existingHome] = await db.select().from(homepageContent).limit(1);
+    if (existingHome) {
+      const updates: any = {};
+      if (existingHome.heroTitle && existingHome.heroTitle.startsWith("Advanced ")) {
+        updates.heroTitle = existingHome.heroTitle.replace("Advanced ", "");
+      }
+      if (existingHome.heroSubtitle && existingHome.heroSubtitle.includes("advanced ")) {
+        updates.heroSubtitle = existingHome.heroSubtitle.replace(/advanced\s+/gi, "");
+      }
+      if (Object.keys(updates).length > 0) {
+        updates.updatedAt = new Date().toISOString();
+        await db.update(homepageContent).set(updates).where(eq(homepageContent.id, existingHome.id));
+        console.log("Fixed homepage content: removed 'Advanced'");
+      }
+    }
+
+    // Re-insert to continue seeding (onConflictDoNothing protects existing)
+    await db.insert(homepageContent).values({
+      id: 1,
+      heroBadge: "Engineering a Greener Tomorrow",
+      heroTitle: "Process Optimization & Sustainable Solutions",
+      heroSubtitle: "Global engineering consultancy specializing in chemical engineering, modeling, and sustainable industrial innovation.",
       heroBgImage: "/hero-bg.png",
       stats: [
         { "value": "10+", "label": "Global Projects" },
@@ -112,7 +137,7 @@ async function main() {
       servicesTitle: "Comprehensive Engineering Solutions",
       servicesSubtitle: "We deliver end-to-end technical excellence across the entire chemical and process engineering lifecycle.",
       sustainabilityTitle: "Pioneering the Transition to Efficient and Sustainable Solutions",
-      sustainabilityText: "At SustainPro Process Solutions LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future.",
+      sustainabilityText: "At SustainPro Process SolutionTM LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future.",
       sustainabilityItems: [
         "Engineering Solutions",
         "Process Excellence",
@@ -127,30 +152,30 @@ async function main() {
     console.log("Seeding about page content...");
     const defaultAdvisors = [
       {
-        name: "Dr. Sridhar Dalai",
-        title: "Associate Professor",
+        name: "1. Sridhar Dalai",
+        title: "Assistant Professor",
         institution: "School of Engineering and Applied Science, Ahmedabad University",
         photoUrl: "/sridhar_dalai.png",
-        bio: "Specializes in chemical reaction engineering, catalysis, process design, and sustainability. Dr. Dalai has extensive expertise in modeling and optimizing industrial chemical processes.",
+        bio: "Expertise in chemical process engineering, process design and optimization, process simulation, scale-up, mass and energy integration, and industrial problem-solving. His professional experience includes applying engineering principles to improve process performance, resource utilization, and operational efficiency, with a strong focus on practical solutions for industry.",
         link: "https://ahduni.edu.in/faculty/sridhar-dalai/"
       },
       {
-        name: "Dr. Dharamashi Rabari",
+        name: "2. Dharamashi Rabari",
         title: "Associate Professor",
         institution: "School of Engineering and Applied Science, Ahmedabad University",
         photoUrl: "/dharamashi_rabari.png",
-        bio: "Focuses on heat transfer, energy systems, process intensification, and green separations. He specializes in designing energy-efficient separation processes and sustainable technology.",
+        bio: "Expertise in chemical process engineering, process simulation, optimization, separation processes, and thermodynamic analysis, with a focus on translating engineering principles into practical solutions for industrial process improvement. His professional experience includes applying these principles to process intensification for cleaner production, water treatment, catalysis, carbon footprint reduction, and sustainable industrial solutions.",
         link: "https://ahduni.edu.in/academics/schools-centres/school-of-engineering-and-applied-science/people-1/dharamashi-rabari/"
       }
     ];
 
     await db.insert(aboutContent).values({
       id: 1,
-      heroTitle: "About SustainPro",
+      heroTitle: "SustainPro Process SolutionTM LLP",
       heroSubtitle: "Engineering a greener tomorrow through innovative process solutions, technical excellence, and sustainable practices.",
       heroBgImage: "/about-bg.png",
       whoWeAreTitle: "Who We Are",
-      whoWeAreText: "SustainPro Process Solutions™ is a premium global engineering consultancy. We specialize in chemical engineering, process optimization, and sustainable industrial innovation. Our team of world-class experts partners with industries to enhance efficiency, reduce environmental impact, and pioneer green technologies.",
+      whoWeAreText: "SustainPro Process SolutionTM LLP is a premium global engineering consultancy. We specialize in chemical engineering, process optimization, and sustainable industrial innovation. Our team of leading experts collaborates with industries to improve efficiency, minimize environmental impact, and advance innovative green technologies.",
       visionTitle: "Our Vision",
       visionText: "To be the global leader in driving the industrial transition towards sustainable and highly optimized processes.",
       missionTitle: "Our Mission",
@@ -158,7 +183,7 @@ async function main() {
       valuesTitle: "Core Values",
       valuesText: "Integrity, innovation, sustainability, and technical excellence form the foundation of every project we undertake.",
       leadershipTitle: "Leadership",
-      leadershipText: "Guided by industry veterans with decades of combined experience in high-stakes chemical engineering and R&D.",
+      leadershipText: "Led by academicians with strong expertise in chemical engineering and extensive experience in industry-focused research, consultancy, and R&D.",
       advisors: defaultAdvisors,
     }).onConflictDoNothing();
 
@@ -189,16 +214,16 @@ async function main() {
         },
         {
           title: "Modeling & Simulation",
-          description: "Advanced digital representations of physical processes.",
+          description: "Digital representations of physical processes and thermodynamic analysis.",
           icon: "BarChart",
-          details: ["Aspen Plus / HYSYS", "CFD modeling", "Digital process engineering", "Optimization studies"],
+          details: ["Process Modeling & Simulation", "CFD modeling", "Digital process engineering", "Process Engineering"],
           order: 2,
         },
         {
-          title: "Optimization & Troubleshooting",
+          title: "Process Optimization",
           description: "Maximizing yield and resolving operational bottlenecks.",
           icon: "Zap",
-          details: ["Plant performance analysis", "Bottleneck identification", "Energy optimization", "Operational troubleshooting"],
+          details: ["Plant performance analysis", "Energy Integration", "Mass Integration", "Water Integration"],
           order: 3,
         },
         {
@@ -219,7 +244,7 @@ async function main() {
           title: "Training & Professional Development",
           description: "Empowering the next generation of engineers.",
           icon: "GraduationCap",
-          details: ["Industrial workshops", "Faculty development programs", "Technical training", "Skill enhancement"],
+          details: ["Industrial Workshops", "Chemical Engineering Refresher Course", "Technical training", "Technical Skill Development"],
           order: 6,
         },
       ]);
@@ -278,9 +303,10 @@ async function main() {
     const existingTraining = await db.select().from(trainingTypes).limit(1);
     if (existingTraining.length === 0) {
       await db.insert(trainingTypes).values([
-        { title: "Industrial Workshops", description: "Hands-on training for plant engineers focusing on practical troubleshooting and efficiency.", icon: "Briefcase", order: 1 },
-        { title: "Faculty Development", description: "Programs designed to bridge the gap between academic curriculum and industrial realities.", icon: "Users", order: 2 },
-        { title: "Technical Seminars", description: "Focused deep-dives into specific topics like carbon capture and thermodynamic modeling.", icon: "Calendar", order: 3 },
+        { title: "Industrial Workshops", description: "Hands-on training for plant engineers focusing on modelling and simulation, energy integration using software.", icon: "Briefcase", order: 1 },
+        { title: "Chemical Engineering Refresher Course", description: "Strengthening fundamental chemical engineering knowledge through practical, industry-oriented refresher training.", icon: "BookOpen", order: 2 },
+        { title: "Process Design course", description: "Building practical skills in process engineering design through industry-oriented concepts, methods, and applications.", icon: "Pencil", order: 3 },
+        { title: "Technical Seminars", description: "Practical technical seminars on process safety, industrial operations, sustainability, and emerging engineering practices.", icon: "Calendar", order: 4 },
       ]);
     }
 
@@ -289,8 +315,8 @@ async function main() {
     const existingEvents = await db.select().from(events).limit(1);
     if (existingEvents.length === 0) {
       await db.insert(events).values([
-        { title: "Advanced Process Simulation Workshop", date: "Oct 15, 2024", type: "Industrial Workshop", venue: "Seminar Hall A / Online", order: 1 },
-        { title: "Green Chemistry Integration in Manufacturing", date: "Nov 02, 2024", type: "Faculty Development", venue: "Research Lab B", order: 2 },
+        { title: "Process Simulation Workshop", date: "Oct 15, 2024", type: "Industrial Workshop", venue: "Seminar Hall A / Online", order: 1 },
+        { title: "Green Chemistry Integration in Manufacturing", date: "Nov 02, 2024", type: "Specialized Workshop", venue: "Research Lab B", order: 2 },
         { title: "Energy Optimization Masterclass", date: "Dec 10, 2024", type: "Technical Training", venue: "Main Auditorium / Zoom", order: 3 },
       ]);
     }

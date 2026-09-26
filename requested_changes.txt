@@ -1,0 +1,283 @@
+<USER_REQUEST>
+STRICT WEBSITE MODIFICATION INSTRUCTIONS
+
+I need you to modify my EXISTING WEBSITE. This website is CMS-based.
+
+IMPORTANT: I CANNOT ATTACH THE WORD DOCUMENT. Therefore, all required changes are written below. You must follow this prompt as the complete and only change list.
+
+DO NOT redesign, rebuild, migrate, or otherwise change my website. Make ONLY the changes listed below. Preserve everything else exactly as it is.
+
+CMS-FIRST RULE
+1. First inspect the existing website and identify which CMS it uses.
+2. If a requested change can be made through the existing CMS portal, make it through the CMS.
+3. If a requested change cannot be made through the CMS, make it through the existing website code or the minimum necessary implementation.
+4. If CMS access is unavailable, do not guess credentials or create a replacement CMS. Use the existing code only where appropriate, or clearly report what access is required.
+5. Do not create a new CMS, replace the CMS, migrate the website, change the database, or alter backend architecture unless strictly required for a requested feature.
+6. Do not leave a requested change incomplete merely because it cannot be done through the CMS.
+7. CMS for content where possible; code only when required. In both cases, make ONLY the requested changes.
+
+STRICT PRESERVATION RULE
+Do not change existing layout, design, styling, animations, images, fonts, spacing, responsiveness, navigation behavior, unrelated content, buttons, APIs, authentication, database, or backend functionality. Do not make improvements, redesigns, or extra changes.
+
+==================================================
+1. MAIN PAGE
+==================================================
+
+Change the heading:
+Advanced Process Optimization & Sustainable Solutions
+
+To:
+Process Optimization & Sustainable Solutions
+
+Remove only the first word Advanced.
+
+Change the main page background to a light color such as sky blue. Do not change unrelated colors or the existing theme.
+
+Put/add the Home tab on the front/main page navigation.
+
+==================================================
+2. ABOUT US
+==================================================
+
+Make ONLY the following changes.
+
+Company name:
+Change the company name to:
+SustainPro Process SolutionTM LLP
+
+Add LLP only as specified. Do not otherwise change the company description.
+
+Replace this exact text:
+Our team of world-class experts partners with industries to enhance efficiency, reduce environmental impact, and pioneer green technologies.
+
+With:
+Our team of leading experts collaborates with industries to improve efficiency, minimize environmental impact, and advance innovative green technologies.
+
+Leadership:
+Replace:
+Guided by industry veterans with decades of combined experience in high-stakes chemical engineering and R&D.
+
+With:
+Led by academicians with strong expertise in chemical engineering and extensive experience in industry-focused research, consultancy, and R&D.
+
+Faculty Advisors:
+Replace the Faculty Advisors heading/content with:
+
+Founders
+
+1. Sridhar Dalai
+Assistant Professor, School of Engineering and Applied Science, Ahmedabad University
+
+Expertise in chemical process engineering, process design and optimization, process simulation, scale-up, mass and energy integration, and industrial problem-solving. His professional experience includes applying engineering principles to improve process performance, resource utilization, and operational efficiency, with a strong focus on practical solutions for industry.
+
+2. Dharamashi Rabari
+Associate Professor, School of Engineering and Applied Science, Ahmedabad University
+
+Expertise in chemical process engineering, process simulation, optimization, separation processes, and thermodynamic analysis, with a focus on translating engineering principles into practical solutions for industrial process improvement. His professional experience includes applying these principles to process intensification for cleaner production, water treatment, catalysis, carbon footprint reduction, and sustainable industrial solutions.
+
+Do not change any other About Us content.
+
+==================================================
+3. CONTACT US
+==================================================
+
+Change the contact address to exactly:
+
+K-501, Samarthya Status,
+Sabarmati, Ahmedabad, 380019, India
+
+Do not change anything else in Contact Us.
+
+==================================================
+4. QUICK LINKS
+==================================================
+
+Remove:
+Research & Innovation
+
+Add:
+Home
+
+Do not change the other Quick Links.
+
+Remove:
+Developed by -----
+
+Remove the Developed by text completely. Do not replace it with anything.
+
+==================================================
+5. OUR SERVICES — MODELING & SIMULATION
+==================================================
+
+Remove these existing items:
+- Aspen Plus / HYSYS
+- CFD modeling
+- Digital process engineering
+- Optimization studies
+
+Add exactly:
+- Process Modeling & Simulation
+- CFD modeling
+- Digital process engineering
+- Process Engineering
+
+Do not add anything else or change unrelated service sections.
+
+==================================================
+6. RENAME SERVICE TAB
+==================================================
+
+Rename:
+Optimization & Troubleshooting
+
+To:
+Process Optimization
+
+Only rename this tab.
+
+==================================================
+7. PROCESS OPTIMIZATION CONTENT
+==================================================
+
+Replace the existing bullet points:
+- Plant performance analysis
+- Bottleneck identification
+- Energy optimization
+- Operational troubleshooting
+
+With exactly:
+- Plant performance analysis
+- Energy Integration
+- Mass Integration
+- Water Integration
+
+Do not add anything else.
+
+==================================================
+8. TRAINING & PROFESSIONAL DEVELOPMENT
+==================================================
+
+Remove:
+- Industrial workshops
+- Faculty development programs
+- Technical training
+- Skill enhancement
+
+Add exactly:
+- Industrial Workshops
+- Chemical Engineering Refresher Course
+- Technical training
+- Technical Skill Development
+
+Preserve all unrelated content.
+
+==================================================
+9. REMOVE SOFTWARE SOLUTIONS
+==================================================
+
+Remove Software Solutions from the main navigation/main tab.
+
+We do not require this tab.
+
+Do not remove anything else.
+
+==================================================
+10. TRAINING SECTION
+==================================================
+
+Industrial workshops description must be exactly:
+Hands-on training for plant engineers focusing on modelling and simulation, energy integration using software.
+
+Remove Faculty Development.
+
+Add a new tab titled:
+Chemical Engineering Refresher Course
+
+Description:
+Strengthening fundamental chemical engineering knowledge through practical, industry-oriented refresher training.
+
+Add a new tab titled:
+Process Design course
+
+Description:
+Building practical skills in process engineering design through industry-oriented concepts, methods, and applications.
+
+Technical Seminars description must be exactly:
+Practical technical seminars on process safety, industrial operations, sustainability, and emerging engineering practices.
+
+At the bottom of the Training tab, add:
+Upcoming Programs
+
+Do not change unrelated Training content.
+
+==================================================
+11. CAREER TAB
+==================================================
+
+The Career tab must remain the last tab.
+
+Add an option/form to upload a resume in the Career section. The user/candidate should be able to upload their resume.
+
+Reference for resume-upload functionality only:
+https://adventenvirocare.com/careers/
+
+Do not copy or redesign the website based on this reference.
+
+If the existing CMS supports resume upload, use the CMS. If not, implement the minimum necessary functionality through the existing website code/backend.
+
+Do not change unrelated Career content.
+
+==================================================
+12. GENERAL FORMATTING
+==================================================
+
+Text must be left aligned and justified where applicable.
+
+When content is not selectable, the cursor should show an arrow instead of a text-selection cursor.
+
+Do not change cursor behavior unnecessarily for selectable text or interactive elements.
+
+==================================================
+13. FINAL VERIFICATION
+==================================================
+
+Before making changes:
+- Inspect the existing website.
+- Inspect the existing CMS and determine whether CMS editing is possible.
+- Identify which changes require CMS and which require code.
+
+After making changes:
+- Verify every requested text change.
+- Verify the Home tab and Quick Links changes.
+- Verify Software Solutions is removed from the main tab.
+- Verify all service and training changes.
+- Verify the Career resume upload.
+- Verify the main page background.
+- Verify text alignment and cursor behavior.
+- Verify that the Career tab remains last.
+- Verify that unrelated website design and functionality remain unchanged.
+
+Do not redesign or rebuild anything.
+Do not make any extra changes.
+Do not modify unrelated CMS content, code, database records, or backend functionality.
+
+If a requested change cannot be completed because CMS access or another required capability is unavailable, clearly report that limitation rather than making unrelated changes.
+
+FINAL PRIORITY:
+EXISTING WEBSITE + ONLY THE ABOVE CHANGES.
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-11T14:34:44+05:30.
+
+The user's current state is as follows:
+Other open documents:
+- c:\Users\dev\OneDrive\Desktop\web\okkok-main\artifacts\api-server\src\index.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\dev\OneDrive\Desktop\web\okkok-main\render.yaml (LANGUAGE_YAML)
+- c:\Users\dev\OneDrive\Desktop\web\okkok-main\package.json (LANGUAGE_JSON)
+- c:\Users\dev\OneDrive\Desktop\web\okkok-main\artifacts\api-server\src\routes\admin\homepage.ts (LANGUAGE_TYPESCRIPT)
+- c:\Users\dev\OneDrive\Desktop\web\okkok-main\artifacts\api-server\src\seed.ts (LANGUAGE_TYPESCRIPT)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Claude Opus 4.6 (Thinking). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

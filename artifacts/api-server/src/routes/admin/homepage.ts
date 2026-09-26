@@ -14,8 +14,8 @@ router.get("/homepage", async (req, res) => {
       content = {
         id: 1,
         heroBadge: "Engineering a Greener Tomorrow",
-        heroTitle: "Advanced Process Optimization & Sustainable Solutions",
-        heroSubtitle: "Global engineering consultancy specializing in chemical engineering, advanced modeling, and sustainable industrial innovation.",
+        heroTitle: "Process Optimization & Sustainable Solutions",
+        heroSubtitle: "Global engineering consultancy specializing in chemical engineering, modeling, and sustainable industrial innovation.",
         heroBgImage: "/hero-bg.png",
         stats: [
           { "value": "10+", "label": "Global Projects" },
@@ -25,7 +25,7 @@ router.get("/homepage", async (req, res) => {
         servicesTitle: "Comprehensive Engineering Solutions",
         servicesSubtitle: "We deliver end-to-end technical excellence across the entire chemical and process engineering lifecycle.",
         sustainabilityTitle: "Pioneering the Transition to Efficient and Sustainable Solutions",
-        sustainabilityText: "At SustainPro Process Solutions LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future.",
+        sustainabilityText: "At SustainPro Process SolutionTM LLP, we partner with chemical, petrochemical, pharmaceutical, and biochemical industries to design smarter, optimize existing processes, and implement sustainable engineering solutions. Our expertise combines process engineering, simulation, and data-driven optimization to improve productivity, reduce resource and energy consumption, and enhance environmental performance. We are committed to helping organizations achieve operational excellence while building a more sustainable future.",
         sustainabilityItems: [
           "Engineering Solutions",
           "Process Excellence",
